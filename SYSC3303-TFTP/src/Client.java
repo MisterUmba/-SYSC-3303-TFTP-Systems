@@ -127,10 +127,10 @@ public class Client {
 			if (s.compareTo("1") == 0) {
 				System.out.println("Forming a RRQ connection");
 				System.out.println("Client: creating packet . . .");
-				
+
 				System.out.println("Type in the filename: ");
 				s = scan.next();
-				
+
 				// Prepare a DatagramPacket and send it via sendReceiveSocket
 				// to sendPort on the destination host (also on this machine).
 
@@ -167,7 +167,7 @@ public class Client {
 					e.printStackTrace();
 					System.exit(1);
 				}
-				
+
 				System.out.println("Client: packet created");
 				System.out.println("Client: sending packet . . .");
 
@@ -196,7 +196,7 @@ public class Client {
 				}
 
 				System.out.println("Client: Packet sent.");
-				
+
 				int size = 512;
 				byte[] receivingArray = new byte[65535 * 512];
 				int blockNum = 1;
@@ -228,25 +228,25 @@ public class Client {
 					}
 					size = receivePacket.getLength()-4;
 					System.arraycopy(data, 4, receivingArray, (blockNum-1)*512, size);
-					
+
 					System.out.println("Creating packet . . .");
-					
+
 					msg = new byte[4];
 					msg[0] = 0;
 					msg[1] = 4;
 					msg[2] = (byte) (blockNum);
 					msg[3] = (byte) (blockNum >>> 8);
-					
+
 					len = msg.length;
 					blockNum++;
-					
+
 					try {
 						sendPacket = new DatagramPacket(msg, len, InetAddress.getLocalHost(), sendPort);
 					} catch (UnknownHostException e) {
 						e.printStackTrace();
 						System.exit(1);
 					}
-					
+
 					System.out.println("Packet created");
 					System.out.println("Sending packet . . .");
 					if (verbose == true) {
@@ -263,7 +263,7 @@ public class Client {
 						String sending = new String(msg, 0, len);
 						System.out.println(sending);
 					}
-					
+
 					// Send the datagram packet to the server via the send/receive socket.
 
 					try {
@@ -272,9 +272,9 @@ public class Client {
 						e.printStackTrace();
 						System.exit(1);
 					}
-					
+
 				}
-				
+
 				String Filepath = "C:\\TestStuff\\";
 				File file = new File(Filepath);
 				try {
